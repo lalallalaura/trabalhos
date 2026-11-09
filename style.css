@@ -1,6 +1,5 @@
 /* =========================================
-   LAURA — PORTFÓLIO
-   Lapidação visual mantendo a identidade
+    — PORTFÓLIO
 ========================================= */
 
 :root {
@@ -235,10 +234,9 @@ body.light .navbar.scrolled { background: rgba(248, 245, 251, .91); }
 }
 .project-card:hover { transform: translateY(-7px); border-color: rgba(168,85,247,.55); box-shadow: 0 24px 55px rgba(0,0,0,.25); }
 .project-image { height: 245px; display: block; position: relative; overflow: hidden; background: var(--bg-soft); }
-.project-image img { width: 100%; height: 100%; display: block; object-fit: cover; transition: transform .55s ease, filter .4s ease; }
-.project-card:hover .project-image img { transform: scale(1.045); filter: brightness(.82); }
-.image-link { position: absolute; right: 17px; bottom: 17px; width: 42px; height: 42px; display: grid; place-items: center; border-radius: 50%; background: var(--primary); color: #fff; font-size: 1.1rem; box-shadow: 0 6px 20px rgba(0,0,0,.2); transition: transform var(--transition); }
+.image-link { position: absolute; right: 17px; bottom: 17px; width: 42px; height: 42px; display: grid; place-items: center; border-radius: 50%; background: var(--primary); color: #fff; font-size: 1.1rem; box-shadow: 0 6px 20px rgba(0,0,0,.2); transition: transform var(--transition); z-index: 2; }
 .project-card:hover .image-link { transform: rotate(45deg); }
+.project-image:focus-visible { outline: 2px solid var(--primary-bright); outline-offset: -4px; }
 .project-info { padding: 24px 25px 25px; }
 .project-topline { display: flex; align-items: center; justify-content: space-between; gap: 12px; color: var(--muted); font-size: .62rem; font-weight: 700; letter-spacing: 1.2px; }
 .project-status { color: #83d7a0; letter-spacing: .2px; text-transform: none; }
@@ -250,15 +248,51 @@ body.light .navbar.scrolled { background: rgba(248, 245, 251, .91); }
 .project-link i { transition: transform var(--transition); }
 .project-link:hover { color: var(--text); }
 .project-link:hover i { transform: translate(3px, -3px); }
-.project-art { display: flex; flex-direction: column; justify-content: center; padding: 35px 42px; }
-.project-art strong { font-family: 'Montserrat', sans-serif; font-size: clamp(2.1rem, 5vw, 3.3rem); font-weight: 800; letter-spacing: -2px; color: #fff; }
-.project-art strong span { color: #d9b8ff; }
+/* Capas dos projetos — 100% CSS, mesma estrutura em todos os cards */
+.project-art { --art-accent: #d9b8ff; --bar: rgba(255,255,255,.82); isolation: isolate; display: flex; flex-direction: column; justify-content: center; padding: 35px 42px; }
+.project-art::before, .project-art::after { content: ""; position: absolute; z-index: 0; pointer-events: none; }
+.art-kicker, .project-art strong, .art-caption { position: relative; z-index: 1; }
+.project-art strong { margin: 12px 0 10px; font-family: 'Montserrat', sans-serif; font-size: clamp(2rem, 4.4vw, 2.9rem); font-weight: 800; letter-spacing: -2px; line-height: 1.02; color: #fff; }
+.project-art strong span { color: var(--art-accent); }
 .art-kicker { color: rgba(255,255,255,.72); font-size: .65rem; font-weight: 700; letter-spacing: 2px; }
-.art-caption { margin-top: 5px; color: rgba(255,255,255,.72); font-size: .82rem; }
+.art-caption { color: rgba(255,255,255,.72); font-size: .82rem; }
+
+/* Horror Shop — lua e estrelas */
+.project-art-horror { --art-accent: #e5303f; background: radial-gradient(circle at 82% 22%, rgba(229,48,63,.42), transparent 34%), linear-gradient(125deg, #0a0507, #2a0b12 62%, #120709); }
+.project-art-horror::before { right: 64px; top: 50%; width: 96px; height: 96px; margin-top: -48px; border-radius: 50%; box-shadow: 18px -8px 0 0 #efe6d8; filter: drop-shadow(0 0 16px rgba(229,48,63,.55)); }
+.project-art-horror::after { right: 190px; top: 46px; width: 3px; height: 3px; border-radius: 50%; background: #efe6d8; box-shadow: 40px 60px 0 #efe6d8, -30px 110px 0 1px rgba(239,230,216,.6), 90px 150px 0 #efe6d8, 150px 30px 0 rgba(239,230,216,.7); }
+
+/* Harmoody — equalizador */
+.project-art-music { --art-accent: #ff8fa8; background: radial-gradient(circle at 80% 22%, rgba(255,107,139,.5), transparent 34%), linear-gradient(125deg, #150c2b, #4a2a8a 58%, #b8406f); }
+.project-art-music::before { right: 48px; top: 50%; width: 144px; height: 120px; margin-top: -60px; background:
+  linear-gradient(var(--bar), var(--bar)) 0 100% / 12px 40% no-repeat,
+  linear-gradient(var(--bar), var(--bar)) 22px 100% / 12px 75% no-repeat,
+  linear-gradient(var(--bar), var(--bar)) 44px 100% / 12px 55% no-repeat,
+  linear-gradient(var(--bar), var(--bar)) 66px 100% / 12px 100% no-repeat,
+  linear-gradient(var(--bar), var(--bar)) 88px 100% / 12px 65% no-repeat,
+  linear-gradient(var(--bar), var(--bar)) 110px 100% / 12px 85% no-repeat,
+  linear-gradient(var(--bar), var(--bar)) 132px 100% / 12px 35% no-repeat; }
+.project-art-music::after { right: -30px; top: 50%; width: 230px; height: 230px; margin-top: -115px; border-radius: 50%; border: 1px solid rgba(255,255,255,.14); box-shadow: 0 0 0 28px rgba(255,255,255,.04); }
+
+/* Magnolia's Garden — folhas */
+.project-art-garden { --art-accent: #f6b8cc; background: radial-gradient(circle at 80% 24%, rgba(246,184,204,.3), transparent 34%), linear-gradient(125deg, #07150f, #1f4a37 62%, #0d2018); }
+.project-art-garden::before { right: 108px; top: 50%; width: 76px; height: 136px; margin-top: -78px; border-radius: 0 100% 0 100%; background: linear-gradient(160deg, rgba(139,214,170,.6), rgba(139,214,170,.08)); transform: rotate(-18deg); }
+.project-art-garden::after { right: 52px; top: 50%; width: 60px; height: 110px; margin-top: -42px; border-radius: 100% 0 100% 0; background: linear-gradient(200deg, rgba(246,184,204,.6), rgba(246,184,204,.08)); transform: rotate(14deg); }
+
+/* Me Ajuda — gráfico e moeda */
 .project-art-purple { background: radial-gradient(circle at 80% 20%, rgba(202,145,255,.48), transparent 30%), linear-gradient(125deg, #21152e, #60378b 65%, #2a183b); }
-.project-art-blue { background: radial-gradient(circle at 78% 20%, rgba(42,108,180,.65), transparent 32%), linear-gradient(125deg, #050c15, #102b46 65%, #15171b); }
-.project-art-blue strong { font-size: clamp(1.8rem, 4vw, 2.8rem); }
-.project-art-blue strong span { color: #f20d27; }
+.project-art-purple::before { right: 52px; top: 50%; width: 126px; height: 110px; margin-top: -45px; background:
+  linear-gradient(var(--bar), var(--bar)) 0 100% / 14px 25% no-repeat,
+  linear-gradient(var(--bar), var(--bar)) 28px 100% / 14px 42% no-repeat,
+  linear-gradient(var(--bar), var(--bar)) 56px 100% / 14px 60% no-repeat,
+  linear-gradient(var(--bar), var(--bar)) 84px 100% / 14px 80% no-repeat,
+  linear-gradient(var(--bar), var(--bar)) 112px 100% / 14px 100% no-repeat; }
+.project-art-purple::after { right: 130px; top: 34px; width: 56px; height: 56px; border-radius: 50%; border: 2px solid var(--art-accent); box-shadow: inset 0 0 0 7px transparent, inset 0 0 0 9px rgba(217,184,255,.45); opacity: .8; }
+
+/* Vértice Garage — velocímetro */
+.project-art-blue { --art-accent: #f20d27; background: radial-gradient(circle at 78% 20%, rgba(42,108,180,.65), transparent 32%), linear-gradient(125deg, #050c15, #102b46 65%, #15171b); }
+.project-art-blue::before { right: 52px; top: 50%; width: 140px; height: 140px; margin-top: -70px; border-radius: 50%; border: 3px solid rgba(255,255,255,.16); border-top-color: #f20d27; border-right-color: #f20d27; transform: rotate(-20deg); }
+.project-art-blue::after { right: 119.5px; top: calc(50% - 52px); width: 3px; height: 52px; border-radius: 2px; background: #f20d27; transform-origin: 50% 100%; transform: rotate(38deg); }
 
 /* Sobre */
 .about-section { background: linear-gradient(180deg, rgba(168,85,247,.035), transparent); }
@@ -316,6 +350,8 @@ body.light .navbar.scrolled { background: rgba(248, 245, 251, .91); }
   .section-heading { display: block; margin-bottom: 30px; }
   .section-heading > p { margin-top: 15px; }
   .project-image { height: 220px; }
+  .project-art { padding: 30px 26px; }
+  .project-art::before, .project-art::after { opacity: .3; }
   .project-info p { min-height: 0; }
   .about-panel { grid-template-columns: 1fr; padding: 28px 22px; gap: 30px; }
   .skills-groups { grid-template-columns: 1fr; gap: 15px; }
